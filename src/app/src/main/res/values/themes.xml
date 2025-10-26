@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.Breathe_tracking" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="android:fontFamily">@font/Poppins_Regular</item>
-        <item name="fontFamily">@font/Poppins_Regular</item>
+        <item name="android:fontFamily">@font/poppins_regular</item>
+        <item name="fontFamily">@font/poppins_regular</item>
     </style>
 
     <style name="Theme.Breathe_tracking" parent="Base.Theme.Breathe_tracking" />
