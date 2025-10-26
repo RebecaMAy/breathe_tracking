@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
+
+    //Colores principales
+    <color name="colorPrimary">#297fb8</color>
+    <color name="colorOnPrimary">#FFFFFF</color>
+
+
+    //Paleta de colores de la aplicacion
+    <color name="dark_blue">#297fb8</color>
+    <color name="medium_blue">#5ba4db</color>
+    <color name="light_blue_gray">#a5bed8</color>
+    <color name="bright_blue">#3846ff</color>
+    <color name="vibrant_blue">#0047ff</color>
+
+
     <color name="white">#FFFFFFFF</color>
+    <color name="black">#FF000000</color>
 </resources>
