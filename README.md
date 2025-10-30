@@ -1,44 +1,49 @@
-# 🌍 Propuesta de Modelo de Negocio: Red de Sensores Móviles Hiperlocales
+# 📱 README: App de Nodoportador (Worker App) - Breathe Tracking
 
-Este proyecto define un **Modelo de Negocio** basado en un ecosistema de roles que aprovecha las flotas de trabajadores existentes para crear una **red de sensores móviles** de bajo coste. El objetivo es generar **datos ambientales hiperlocales** (calidad del aire, ruido, etc.) que son valiosos tanto para la gestión operativa B2B como para el consumo de datos B2C.
+Este documento describe el funcionamiento de la **Aplicación Móvil Ligera (App)** diseñada para el **Nodoportador** (el trabajador o empleado).
 
-## 👥 Segmentos de Clientes y Roles
+El objetivo principal de esta aplicación es servir como un panel de control simple para que el trabajador pueda **vincularse a un sensor físico** y **verificar su estado operativo** durante sus rutas de trabajo.
 
-El ecosistema se articula en torno a tres roles clave, cada uno con una función y propuesta de valor diferenciada:
+## 👥 Rol del Nodoportador
 
-| Rol | Función Principal | Propuesta de Valor Clave |
-| :--- | :--- | :--- |
-| **1. Administrador** (Cliente B2B) | Paga la suscripción SaaS para la **gestión de su flota** y consume los datos ambientales de su zona. | **Control Operativo** de Nodoportadores, **Optimización de Rutas** y **Datos Propios** (Mapas de Calor). |
-| **2. Nodoportador** (Generador de Datos) | Empleado que lleva el **sensor (nodo)** en sus rutas de trabajo, generando datos de forma pasiva. | **Simplicidad** (hardware no invasivo) y **Canal de Reporte** de incidencias fácil. |
-| **3. Cliente Final** (Consumidor) | Particulares (B2C) o Empresas (B2B Secundario) que **consumen los datos** ambientales hiperlocales. | **Salud y Bienestar** (alertas y mapas personalizados), **Toma de Decisiones Informada** (valoración de zonas). |
+El **Nodoportador** es el empleado (ej. repartidor, técnico de mantenimiento, cartero) que lleva el sensor (nodo) en sus rutas. La recolección de datos es pasiva.
+
+La aplicación móvil **no es para la recolección de datos** (eso lo hace el hardware del sensor de forma automática), sino para la **vinculación inicial** y la **supervisión de incidencias**.
 
 ***
 
-## 💰 Modelo de Ingresos y Viabilidad
+## ⚙️ Flujo de la Aplicación y Funcionalidades
 
-El proyecto se financia mediante una estrategia de ingresos dual que garantiza la sostenibilidad de la red:
+La aplicación se compone de dos pantallas principales, como se muestra en el diseño:
 
-### 1. Ingresos B2B (Principal: El Sustento de la Red)
-* **Suscripción SaaS:** Tarifa mensual/anual por cada **Nodoportador** activo. Cubre:
-    * Acceso a la **Plataforma Web** de gestión de flotas.
-    * **Mantenimiento** y reemplazo del hardware sensor.
-    * Acceso a los **datos propios** generados por sus equipos.
+### 1. Página de Vinculación (Login)
 
-### 2. Ingresos B2C y B2B Secundario (Datos)
-* **Modelo Freemium (B2C):** Acceso gratuito a un mapa general con datos limitados.
-* **Suscripción Premium (B2C):** Tarifa mensual para usuarios que desbloquea **informes históricos**, **alertas personalizadas** y **monitorización de múltiples zonas**.
-* **Venta de Acceso a API (B2B Secundario):** Venta de *datasets* agregados y anonimizados a terceros (ej. consultoras, inmobiliarias) que requieren información ambiental a gran escala.
+Al iniciar la aplicación, el trabajador debe vincular la sesión de su *smartphone* con el sensor físico que se le ha asignado para su jornada.
 
-***
+* **Entrada de Código:** El usuario debe introducir el **"Código único de vinculación"** del sensor (ej. `12345`).
+* **Acceso Alternativo:** La app también permite un acceso rápido mediante **escaneo de QR** (`Acceder con QR`).
+* **Validación:** La app comprueba (contra la API) que el código del sensor existe y está activo. Si es correcto, da acceso al Panel de Control.
 
-## 💻 Arquitectura Tecnológica (Recursos Clave)
+### 2. Panel de Control del Sensor
 
-El servicio se implementa a través de una plataforma de tres canales que gestiona la interacción con cada rol:
+Una vez vinculado, el trabajador accede a una pantalla que le permite **comprobar que todo está bien** y monitorizar el estado del hardware.
 
-| Rol | Canal de Acceso | Funcionalidad |
-| :--- | :--- | :--- |
-| **Administrador** | **Plataforma Web de Gestión (SaaS)** | Dashboard de control operativo, gestión de incidencias, informes. |
-| **Nodoportador** | **Aplicación Móvil Ligera (App)** | Tracking anónimo y de bajo consumo, canal simple para reportar incidencias de hardware. |
-| **Cliente Final** | **Web Pública / Aplicación Móvil** | Visualización de mapas de calor ambientales y gestión de suscripciones. |
+Esta pantalla tiene tres propósitos clave:
 
-Las **Actividades Clave** incluyen el desarrollo y mantenimiento **24/7** de estas tres interfaces, la **venta directa B2B** (licitaciones y *onboarding* de Administradores), y el **análisis de Big Data** para transformar los datos brutos en información útil.
+#### A. Supervisión del Estado del Sensor
+Permite al trabajador verificar el estado operativo del sensor de un vistazo.
+* **Ubicación Actual:** Confirma que el GPS del sensor está reportando.
+* **Estado:** Muestra información contextual (ej. "a 20km del punto de origen").
+* **Batería:** Muestra la batería restante del hardware del sensor.
+
+#### B. Visualización de Mediciones
+Confirma que el sensor está recolectando datos ambientales en tiempo real. El trabajador puede ver los valores actuales de:
+* Ozono
+* Temperatura
+
+#### C. Alertas e Incidencias
+Este es el canal de comunicación clave. Si el sensor detecta una anomalía (ej. "Temperaturas altas en C/Acacias"), la alerta se muestra en la app del trabajador.
+
+* **Aviso al Trabajador:** El nodoportador está al tanto de las condiciones de su entorno.
+* **Aviso al Administrador:** Estas alertas también se envían automáticamente al *Dashboard* del **Administrador (B2B)**, permitiéndole gestionar la incidencia (ej. gestionar el mantenimiento del sensor).
+
